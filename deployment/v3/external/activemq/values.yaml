@@ -1,7 +1,7 @@
 istio:
   enabled: true
   hosts:
-    - activemq.xyz.abc.net
+    - activemq.onpremdev.idencode.link
   ingressController:
     name: ingressgateway-internal
   prefix: /

@@ -11,3 +11,9 @@ postgresqlExtendedConf:
    max_wal_senders: 20
    max_replication_slots: 10
    max_connections: 1000
+
+persistence:
+  enabled: true
+  accessModes:
+    - ReadWriteOnce
+  size: 64Gi

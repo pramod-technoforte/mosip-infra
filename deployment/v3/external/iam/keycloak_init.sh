@@ -17,7 +17,7 @@ function initialize_keycloak() {
   IAMHOST_URL=$(kubectl get cm global -o jsonpath={.data.mosip-iam-external-host})
 
   echo Initializing keycloak
-  helm -n $NS install keycloak-init mosip/keycloak-init --set frontend=https://$IAMHOST_URL/auth --version $CHART_VERSION
+  helm -n $NS install keycloak-init mosip/keycloak-init --set frontend=https://$IAMHOST_URL/auth --set image.repository=technogovstack/keycloak-init  --set image.tag=release-1.2.0.1 --version $CHART_VERSION
   return 0
 }
 

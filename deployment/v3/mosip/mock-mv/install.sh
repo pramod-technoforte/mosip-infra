@@ -22,7 +22,7 @@ function installing_mockmv() {
   helm repo update
 
   echo Installing mock-mv
-  helm -n $NS install mock-mv mosip/mock-mv --version $CHART_VERSION
+  helm -n $NS install mock-mv mosip/mock-mv --set image.repository=technogovstack/mock-mv --set image.tag=release-1.2.0.1.1 --version $CHART_VERSION
 
   kubectl -n $NS  get deploy -o name |  xargs -n1 -t  kubectl -n $NS rollout status
   echo Intalled mock-mv services

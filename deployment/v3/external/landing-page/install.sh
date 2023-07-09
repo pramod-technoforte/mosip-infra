@@ -21,7 +21,7 @@ function landing_page() {
   sed -i 's/\r$//' copy_cm.sh
   ./copy_cm.sh
 
-  VERSION=`git branch | grep "\*" | cut -d ' ' -f 2`
+#  VERSION=`git branch | grep "\*" | cut -d ' ' -f 2`
   NAME=$(kubectl get cm global -o jsonpath={.data.installation-name})
   DOMAIN=$(kubectl get cm global -o jsonpath={.data.installation-domain})
   API=$(kubectl get cm global -o jsonpath={.data.mosip-api-host})
@@ -44,7 +44,7 @@ function landing_page() {
 
   echo Installing landing page
   helm -n $NS install landing-page mosip/landing-page --version $CHART_VERSION  \
-  --set landing.version=$VERSION \
+  --set landing.version=V1.2.0.1-B3 \
   --set landing.name=$NAME \
   --set landing.api=$API \
   --set landing.apiInternal=$API_INTERNAL \

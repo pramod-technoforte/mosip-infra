@@ -36,7 +36,7 @@ if [ $yn = "Y" ]
     ./copy_secrets.sh
 
     echo Installing config-server
-    helm -n $NS install config-server mosip/config-server -f values.yaml --wait --version $CHART_VERSION
+    helm -n $NS install config-server mosip/config-server --set image.repository=technogovstack/config-server  --set image.tag=1.1.2 -f values.yaml --wait --version $CHART_VERSION
     echo Installed Config-server.
     break
   else

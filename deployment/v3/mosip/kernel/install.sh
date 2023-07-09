@@ -22,32 +22,31 @@ function installing_kernel() {
   ./copy_cm.sh
 
   echo Installing authmanager
-  helm -n $NS install authmanager mosip/authmanager --version $CHART_VERSION 
-
+  helm -n $NS install authmanager mosip/authmanager --set image.repository=technogovstack/kernel-auth-service --set image.tag=release-1.2.0.1.1 --version $CHART_VERSION 
   echo Installing auditmanager
-  helm -n $NS install auditmanager mosip/auditmanager --version $CHART_VERSION
+  helm -n $NS install auditmanager mosip/auditmanager --set image.repository=technogovstack/kernel-auditmanager-service --set image.tag=release-1.2.0.1.1 --version $CHART_VERSION
 
   echo Installing idgenerator
-  helm -n $NS install idgenerator mosip/idgenerator --version $CHART_VERSION
+  helm -n $NS install idgenerator mosip/idgenerator --set image.repository=technogovstack/kernel-idgenerator-service --set image.tag=release-1.2.0.1.1 --version $CHART_VERSION
 
   ADMIN_HOST=$(kubectl get cm global -o jsonpath={.data.mosip-admin-host})
   echo Installing masterdata and allowing Admin UI to access masterdata services.
-  helm -n $NS install masterdata mosip/masterdata  --set istio.corsPolicy.allowOrigins\[0\].exact=https://$ADMIN_HOST  --version $CHART_VERSION
+  helm -n $NS install masterdata mosip/masterdata  --set istio.corsPolicy.allowOrigins\[0\].exact=https://$ADMIN_HOST  --set image.repository=technogovstack/kernel-masterdata-service --set image.tag=release-1.2.0.1.1 --version $CHART_VERSION
 
   echo Installing otpmanager
-  helm -n $NS install otpmanager mosip/otpmanager --version $CHART_VERSION
+  helm -n $NS install otpmanager mosip/otpmanager  --set image.repository=technogovstack/kernel-otpmanager-service --set image.tag=release-1.2.0.1.1 --version $CHART_VERSION
 
   echo Installing pridgenerator
-  helm -n $NS install pridgenerator mosip/pridgenerator --version $CHART_VERSION
+  helm -n $NS install pridgenerator mosip/pridgenerator  --set image.repository=technogovstack/kernel-pridgenerator-service --set image.tag=release-1.2.0.1.1 --version $CHART_VERSION
 
   echo Installing ridgenerator
-  helm -n $NS install ridgenerator mosip/ridgenerator --version $CHART_VERSION
+  helm -n $NS install ridgenerator mosip/ridgenerator  --set image.repository=technogovstack/kernel-ridgenerator-service --set image.tag=release-1.2.0.1.1 --version $CHART_VERSION
 
   echo Installing syncdata
-  helm -n $NS install syncdata mosip/syncdata --version $CHART_VERSION
+  helm -n $NS install syncdata mosip/syncdata  --set image.repository=technogovstack/kernel-syncdata-service --set image.tag=release-1.2.0.1.1 --version $CHART_VERSION
 
   echo Installing notifier
-  helm -n $NS install notifier mosip/notifier --version $CHART_VERSION
+  helm -n $NS install notifier mosip/notifier  --set image.repository=technogovstack/kernel-notification-service --set image.tag=release-1.2.0.1.1 --version $CHART_VERSION
 
   kubectl -n $NS  get deploy -o name |  xargs -n1 -t  kubectl -n $NS rollout status
 

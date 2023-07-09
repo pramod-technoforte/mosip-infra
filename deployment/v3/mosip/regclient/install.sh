@@ -46,6 +46,8 @@ function installing_regclient() {
     --set regclient.hostName=$INTERNAL_HOST \
     --set istio.host=$REGCLIENT_HOST \
     --wait \
+#    --set image.repository=technogovstack/registration-client \
+#    --set image.tag=release-1.2.0.1
     --version $CHART_VERSION
 
   echo Get your download url from here

@@ -38,6 +38,7 @@ function installing_mfs() {
     --set istio.corsPolicy.allowOrigins\[1\].prefix=https://$API_INTERNAL_HOST \
     --set istio.corsPolicy.allowOrigins\[2\].prefix=https://verifiablecredential.io \
     --wait                                                           \
+    --set image.repository=technogovstack/mosip-file-server --set image.tag=release-1.2.0.1.1 \
     --version $CHART_VERSION
 
   echo Get your download url from here
